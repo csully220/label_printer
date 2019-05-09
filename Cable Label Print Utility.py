@@ -33,7 +33,7 @@ f_bpl.write(xml_defaults)
 
 # Open the CSV file and parse labels
 num_lines = sum(1 for line in open(fn_csv))
-print(str(int(num_lines/3)) + ' labels found for printing.')
+print(str(num_lines) + ' labels found for printing.')
 f_csv = open(fn_csv, "r")
 
 # Start labels
