@@ -5,8 +5,8 @@
         <printer tear-or-cut-between="after-job" />
     </defaults>
     <labels>
-        <label copies="1" width="2" height="3.75" offset-x="0" offset-y="0" orientation="portrait" >
-            <text position-x="0" position-y=".32" align="center" bold="true" font-name="Courier New" >
+        <label copies="1" width="2" height="3.75" offset-x="0.094" offset-y="-0.19" orientation="portrait" >
+            <text position-x="0" position-y=".62" align="center" bold="true" font-name="Courier New" >
                 <text-sizing>
                     <manual height="1" width="2" font-size="9" />
                 </text-sizing>
@@ -14,7 +14,7 @@
                     <static-text value="W4517P1" />
                 </datasource>
             </text>
-            <text position-x="0" position-y=".6" align="center" bold="true" font-name="Courier New" >
+            <text position-x="0" position-y=".75" align="center" bold="true" font-name="Courier New" >
                 <text-sizing>
                     <manual height="1" width="2" font-size="9" />
                 </text-sizing>

@@ -10,7 +10,8 @@ root.withdraw()
 xml_opening = '<?xml version="1.0"?>\n<bpl-document>\n'
 xml_defaults = '    <defaults>\n        <document units="inches" />\n        <printer tear-or-cut-between="after-job" />\n    </defaults>\n'
 xml_labels = '    <labels>\n'
-xml_label = '        <label copies="1" width="2" height="3.75" offset-x="0.094" offset-y="-0.19" orientation="portrait" >\n'
+#xml_label = '        <label copies="1" width="2" height="3.75" offset-x="0.094" offset-y="-0.19" orientation="portrait" >\n' #offsets for OUR BP33
+xml_label = '        <label copies="1" width="2" height="3.75" offset-x="0" offset-y="0" orientation="portrait" >\n' # no offsets - for loaner BP33
 
 # Get the filename containing label information.
 #fn_csv = input('Enter filename: ')
@@ -39,17 +40,23 @@ f_csv = open(fn_csv, "r")
 # Start labels
 f_bpl.write(xml_labels)
 
-for i in range(num_lines):
+for n in range(num_lines):
 
     # Start label
-    f_bpl.write(xml_label)
+
     label = f_csv.readline()
+    if ( len(label.strip()) == 0 ):
+         continue
     lines = label.split(',')
 
     # Write text tag for each of the three lines
-    txt_height = ['1.8', '2.06', '2.32']
+    f_bpl.write('        <!-- LABEL ' + str(n + 1) + ' -->\n')
+    f_bpl.write(xml_label)
+    
+    txt_height = ['1.5', '1.7', '1.9']
     for i in range(len(lines)):
         line = lines[i].strip().strip("'")
+        f_bpl.write('            <!-- LINE ' + str(i + 1) + ' -->\n')
         f_bpl.write('            <text position-x="0" position-y="0" align="center" bold="true" font-name="Courier New" >\n')
         f_bpl.write('                <text-sizing>\n                    <manual height="' + txt_height[i] + '" width="2" font-size="9" />\n                </text-sizing>\n')
         f_bpl.write('                <datasource>\n                    <static-text value="' + line + '" />\n                </datasource>\n')
