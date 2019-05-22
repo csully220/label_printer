@@ -53,7 +53,7 @@ for n in range(num_lines):
     f_bpl.write('        <!-- LABEL ' + str(n + 1) + ' -->\n')
     f_bpl.write(xml_label)
     
-    txt_height = ['1.5', '1.7', '1.9']
+    txt_height = ['1.42', '1.65', '1.88']
     for i in range(len(lines)):
         line = lines[i].strip().strip("'")
         f_bpl.write('            <!-- LINE ' + str(i + 1) + ' -->\n')
