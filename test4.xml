@@ -6,28 +6,31 @@
     </defaults>
     <labels>
         <label copies="1" width="2" height="3.75" offset-x="0" offset-y="0" orientation="portrait" >
-            <text position-x="0" position-y=".32" align="center" bold="true" font-name="Courier New" >
+            <!-- LINE 1 -->
+            <text position-x="0" position-y="0" align="center" bold="true" font-name="Courier New" >
                 <text-sizing>
-                    <manual height="1" width="2" font-size="9" />
+                    <manual height="1.42" width="2" font-size="9" />
                 </text-sizing>
                 <datasource>
-                    <static-text value="W4517P1" />
+                    <static-text value="LINE 1" />
                 </datasource>
             </text>
-            <text position-x="0" position-y=".6" align="center" bold="true" font-name="Courier New" >
+            <!-- LINE 2 -->
+            <text position-x="0" position-y="0" align="center" bold="true" font-name="Courier New" >
                 <text-sizing>
-                    <manual height="1" width="2" font-size="9" />
+                    <manual height="1.65" width="2" font-size="9" />
                 </text-sizing>
                 <datasource>
-                    <static-text value="A603A33J1" />
+                    <static-text value="LINE 2" />
                 </datasource>
             </text>
-            <text position-x="0" position-y=".88" align="center" bold="true" font-name="Courier New" >
+            <!-- LINE 3 -->
+            <text position-x="0" position-y="0" align="center" bold="true" font-name="Courier New" >
                 <text-sizing>
-                    <manual height="1" width="2" font-size="9" />
+                    <manual height="1.88" width="2" font-size="9" />
                 </text-sizing>
                 <datasource>
-                    <static-text value="A593A1" />
+                    <static-text value="LINE 3" />
                 </datasource>
             </text>
         </label>
