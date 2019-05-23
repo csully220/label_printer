@@ -1,3 +1,3 @@
 from BPL_utils import *
-GenerateXML()
+GenerateXMLinFives()
 input('Press any key to exit...')
