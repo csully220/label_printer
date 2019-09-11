@@ -36,7 +36,7 @@ def GenerateXMLinFives():
     labels = f_csv.readlines()
     labels = [x.strip() for x in labels]
     
-    for n in range(num_files):
+    for n in range(int(num_files)):
         lwrbnd = (n*5)
         uprbnd = (n*5)+5
         if ( uprbnd > len(labels) ):
