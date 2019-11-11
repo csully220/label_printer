@@ -13,15 +13,12 @@ xml_labels = '    <labels>\n'
 xml_label = '        <label copies="1" width="2" height="3.75" offset-x="0" offset-y="0" orientation="portrait" >\n' # no offsets - for loaner BP33
 
 
-def GenerateXMLinFives():
-    root = tk.Tk()
-    root.withdraw()
-    print("Select the CSV file exported from AutoCAD containing label information...")
+
+
+def GenerateXMLinFives(dir_name, filename):
+    #print("Select the CSV file exported from AutoCAD containing label information...")
     
-    fp_csv = filedialog.askopenfilename()
-    fp_csv_sp = ntpath.split(fp_csv)
-    fn_csv = fp_csv_sp[1]
-    os.chdir(fp_csv_sp[0])
+    fn_csv = filename
     
     num_lines = sum(1 for line in open(fn_csv))
     print(str(num_lines) + ' labels found for printing.')
@@ -43,7 +40,7 @@ def GenerateXMLinFives():
             uprbnd = len(labels)
         lbls = labels[lwrbnd:uprbnd]
         #print(str(n) + ' ' + len(lbls))
-        GenerateXMLfromList(lbls, 'labels_' + str(n) + '.xml')
+        GenerateXMLfromList(lbls, dir_name + '\labels_' + str(n) + '.xml')
 
 def GenerateXMLfromList(lbls, fn):
     if(len(lbls)):
@@ -155,21 +152,13 @@ def GenerateXML():
 
     print('Generated ' + fn_bpl + '.')
 
-def SendToBP33(req_confirm = True):
-    root = tk.Tk()
-    root.withdraw()
-
-    # Get the filename containing label information.
-    #fn_csv = input('Enter filename: ')
-    #fn_csv = 'A02055_A.txt'
-    print("Select the BPL/XML file...")
-    fn_bpl = filedialog.askopenfilename()
+def SendToBP33(fn_bpl, req_confirm = True):
 
     printers = win32print.EnumPrinters(2)
     for p in printers:
         if p[3] == 'BBP33':
             printer_name = p[2]
-            print('Found printer ' + printer_name)
+            #print('Found printer ' + printer_name)
 
     if (printer_name):
         cont = 'y'
@@ -190,5 +179,5 @@ def SendToBP33(req_confirm = True):
               win32print.ClosePrinter (hPrinter)
             f_bpl.close()
         else:
-            print('Aborted')
+            #print('Aborted')
 
