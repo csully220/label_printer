@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bpl="http://www.bradycorp.com/printers/bpl" targetNamespace="http://www.bradycorp.com/printers/bpl" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- This section defines types that are used below in the schema definition -->
+	<xs:simpleType name="positive-decimal">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rotation-type">
+		<xs:restriction base="xs:unsignedShort">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="359"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="line-thickness-type">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rounded-corners-type">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="arrow-head-length-type">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="barcode-codecs-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="code 39"/>
+			<xs:enumeration value="code 93"/>
+			<xs:enumeration value="code 128 auto"/>
+			<xs:enumeration value="codabar"/>
+			<xs:enumeration value="ean/jan-8"/>
+			<xs:enumeration value="ean/jan-13"/>
+			<xs:enumeration value="ean 128"/>
+			<xs:enumeration value="ean/ucc 128"/>
+			<xs:enumeration value="ean/upc ext2"/>
+			<xs:enumeration value="ean/upc ext5"/>
+			<xs:enumeration value="hibc"/>
+			<xs:enumeration value="interleaved 2-of-5"/>
+			<xs:enumeration value="jan 8"/>
+			<xs:enumeration value="jan 13"/>
+			<xs:enumeration value="msi plessey"/>
+			<xs:enumeration value="upca"/>
+			<xs:enumeration value="upce2"/>
+			<xs:enumeration value="upce5"/>
+			<xs:enumeration value="code 16k"/>
+			<xs:enumeration value="postnet"/>
+			<xs:enumeration value="aztec"/>
+			<xs:enumeration value="datamatrix"/>
+			<xs:enumeration value="pdf 417"/>
+			<xs:enumeration value="micro 417"/>
+			<xs:enumeration value="ups maxicode"/>
+			<xs:enumeration value="qrcode"/>
+			<xs:enumeration value="code 49"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fill-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="solid"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="rectangle-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+		<xs:attribute name="rounded-corners" type="bpl:rounded-corners-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="circle-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="diamond-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="not-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="star-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="triangle-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="seal-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="cross-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="line-type">
+		<xs:attribute name="start-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="start-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="end-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="end-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="arrow-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="right-arrow"/>
+					<xs:enumeration value="left-arrow"/>
+					<xs:enumeration value="up-arrow"/>
+					<xs:enumeration value="down-arrow"/>
+					<xs:enumeration value="rotational-arrow-clockwise"/>
+					<xs:enumeration value="rotational-arrow-counter-clockwise"/>
+					<xs:enumeration value="rotational-arrow-both-directions"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="line-thickness" type="bpl:line-thickness-type" use="optional"/>
+		<xs:attribute name="fill" type="bpl:fill-type" use="optional"/>
+		<xs:attribute name="arrow-head-right" type="bpl:positive-decimal" use="optional"/>
+		<xs:attribute name="arrow-head-left" type="bpl:positive-decimal" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="text-type">
+		<xs:all>
+			<xs:element name="text-sizing" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:choice minOccurs="1" maxOccurs="1">
+						<xs:element name="autosize">
+							<xs:complexType>
+								<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+								<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="freeform">
+							<xs:complexType>
+								<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="manual">
+							<xs:complexType>
+								<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+								<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+								<xs:attribute name="font-size" type="bpl:positive-decimal" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="datasource" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:choice minOccurs="1" maxOccurs="1">
+						<xs:element name="static-text">
+							<xs:complexType>
+								<xs:attribute name="value" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="prompt-text">
+							<xs:complexType>
+								<xs:attribute name="prompt" type="xs:string" use="required"/>
+								<xs:attribute name="default" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="date-time">
+							<xs:complexType>
+								<xs:attribute name="date-time-format" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="sequence">
+							<xs:complexType>
+								<xs:attribute name="start" type="xs:unsignedInt" use="required"/>
+								<xs:attribute name="increment" type="xs:unsignedInt" use="required"/>
+								<xs:attribute name="number-of-labels" type="xs:unsignedInt" use="required"/>
+								<xs:attribute name="prefix" type="xs:string" use="required"/>
+								<xs:attribute name="postfix" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="align" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="left"/>
+					<xs:enumeration value="center"/>
+					<xs:enumeration value="right"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="font-name" type="xs:string" use="optional"/>
+		<xs:attribute name="italic" type="xs:boolean" use="optional"/>
+		<xs:attribute name="bold" type="xs:boolean" use="optional"/>
+		<xs:attribute name="underline" type="xs:boolean" use="optional"/>
+		<xs:attribute name="vertical-text" type="xs:boolean" use="optional"/>
+		<xs:attribute name="reverse-text" type="xs:boolean" use="optional"/>
+		<xs:attribute name="mirror-text" type="xs:boolean" use="optional"/>
+		<xs:attribute name="show-bounding-box" type="xs:boolean" use="optional"/>
+		<xs:attribute name="bounding-box-line-thickness" type="bpl:line-thickness-type" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="barcode-type">
+		<xs:all minOccurs="1" maxOccurs="1">
+			<xs:element name="datasource">
+				<xs:complexType>
+					<xs:choice minOccurs="1" maxOccurs="1">
+						<xs:element name="static-text">
+							<xs:complexType>
+								<xs:attribute name="value" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="prompt-text">
+							<xs:complexType>
+								<xs:attribute name="prompt" type="xs:string" use="required"/>
+								<xs:attribute name="default" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="date-time">
+							<xs:complexType>
+								<xs:attribute name="date-format" type="xs:string" use="required"/>
+								<xs:attribute name="time-format" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="sequence">
+							<xs:complexType>
+								<xs:attribute name="start" type="xs:unsignedInt" use="required"/>
+								<xs:attribute name="increment" type="xs:unsignedInt" use="required"/>
+								<xs:attribute name="number-of-labels" type="xs:unsignedInt" use="required"/>
+								<xs:attribute name="prefix" type="xs:string" use="required"/>
+								<xs:attribute name="postfix" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="type" type="bpl:barcode-codecs-type" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="human-readable" type="xs:boolean" use="optional"/>
+		<xs:attribute name="human-readable-location" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="top"/>
+					<xs:enumeration value="bottom"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="density" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedByte">
+					<xs:enumeration value="10"/>
+					<xs:enumeration value="20"/>
+					<xs:enumeration value="30"/>
+					<xs:enumeration value="40"/>
+					<xs:enumeration value="50"/>
+					<xs:enumeration value="60"/>
+					<xs:enumeration value="70"/>
+					<xs:enumeration value="80"/>
+					<xs:enumeration value="90"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ratio" use="optional">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="2:1"/>
+					<xs:enumeration value="2.5:1"/>
+					<xs:enumeration value="3:1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="check-character" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="graphic-type">
+		<xs:attribute name="position-x" type="xs:decimal" use="required"/>
+		<xs:attribute name="position-y" type="xs:decimal" use="required"/>
+		<xs:attribute name="height" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="width" type="bpl:positive-decimal" use="required"/>
+		<xs:attribute name="rotation" type="bpl:rotation-type" use="optional"/>
+		<xs:attribute name="file-name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!-- Below is the schema for a bpl-document -->
+	<xs:element name="bpl-document">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="defaults" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="document" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="units" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="inches"/>
+												<xs:enumeration value="mm"/>
+												<xs:enumeration value="dots"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="default-label" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="width" type="bpl:positive-decimal" use="optional"/>
+									<xs:attribute name="height" type="bpl:positive-decimal" use="optional"/>
+									<xs:attribute name="offset-x" type="xs:decimal" use="optional"/>
+									<xs:attribute name="offset-y" type="xs:decimal" use="optional"/>
+									<xs:attribute name="orientation" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="portrait"/>
+												<xs:enumeration value="landscape"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="tear-bar-adjustment" type="xs:decimal" use="optional"/>
+									<xs:attribute name="copies" type="xs:unsignedInt" use="optional"/>
+									<xs:attribute name="font-name" type="xs:string" use="optional"/>
+									<xs:attribute name="font-size" type="bpl:positive-decimal" use="optional"/>
+									<xs:attribute name="label-negative" type="xs:boolean" use="optional"/>
+									<xs:attribute name="label-mirror" type="xs:boolean" use="optional"/>
+									<xs:attribute name="label-rotate" type="bpl:rotation-type" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="printer" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="match-media" type="xs:string" use="optional"/>
+									<xs:attribute name="match-ribbon" type="xs:string" use="optional"/>
+									<xs:attribute name="tear-or-cut-between" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="after-job"/>
+												<xs:enumeration value="between-labels"/>
+												<xs:enumeration value="never"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="heat" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:integer">
+												<xs:minInclusive value="-10"/>
+												<xs:maxInclusive value="10"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="speed" type="xs:unsignedByte" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="labels" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:choice minOccurs="1" maxOccurs="unbounded">
+							<xs:element name="diagnostic-label" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="print" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="font-list"/>
+												<xs:enumeration value="graphic-list"/>
+												<xs:enumeration value="config-settings"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="label" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:choice minOccurs="1" maxOccurs="unbounded">
+										<xs:element name="rectangle" type="bpl:rectangle-type"/>
+										<xs:element name="circle" type="bpl:circle-type"/>
+										<xs:element name="not" type="bpl:not-type"/>
+										<xs:element name="star" type="bpl:star-type"/>
+										<xs:element name="triangle" type="bpl:triangle-type"/>
+										<xs:element name="seal" type="bpl:seal-type"/>
+										<xs:element name="cross" type="bpl:cross-type"/>
+										<xs:element name="line" type="bpl:line-type"/>
+										<xs:element name="arrow" type="bpl:arrow-type"/>
+										<xs:element name="text" type="bpl:text-type"/>
+										<xs:element name="barcode" type="bpl:barcode-type"/>
+										<xs:element name="graphic" type="bpl:graphic-type"/>
+										<xs:element name="diamond" type="bpl:diamond-type"/>
+									</xs:choice>
+									<xs:attribute name="width" type="bpl:positive-decimal" use="optional"/>
+									<xs:attribute name="height" type="bpl:positive-decimal" use="optional"/>
+									<xs:attribute name="offset-x" type="xs:decimal" use="optional"/>
+									<xs:attribute name="offset-y" type="xs:decimal" use="optional"/>
+									<xs:attribute name="orientation" use="optional">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="portrait"/>
+												<xs:enumeration value="landscape"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="tear-bar-adjustment" type="xs:decimal" use="optional"/>
+									<xs:attribute name="copies" type="xs:unsignedInt" use="optional"/>
+									<xs:attribute name="font-name" type="xs:string" use="optional"/>
+									<xs:attribute name="font-size" type="bpl:positive-decimal" use="optional"/>
+									<xs:attribute name="label-negative" type="xs:boolean" use="optional"/>
+									<xs:attribute name="label-mirror" type="xs:boolean" use="optional"/>
+									<xs:attribute name="label-rotate" type="bpl:rotation-type" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
